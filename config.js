@@ -2,12 +2,12 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 require("dotenv").config();
 const toBool = (x) => x === "true";
-const DATABASE_URL = process.env.DATABASE_URL || "./assets/database.db";
+const DATABASE_URL = process.env.DATABASE_URL || "./database.db";
 module.exports = {
   ANTILINK: toBool(process.env.ANTI_LINK) || false,
   LOGS: toBool(process.env.LOGS) || true,
   ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
-  SESSION_ID: process.env.SESSION_ID ||null,
+  SESSION_ID: process.env.SESSION_ID || null,
   LANG: process.env.LANG || "EN",
   AUTH_TOKEN: "",
   HANDLERS:
@@ -41,18 +41,18 @@ module.exports = {
   DATABASE:
     DATABASE_URL === "./assets/database.db"
       ? new Sequelize({
-          dialect: "sqlite",
-          storage: DATABASE_URL,
-          logging: false,
-        })
+        dialect: "sqlite",
+        storage: DATABASE_URL,
+        logging: false,
+      })
       : new Sequelize(DATABASE_URL, {
-          dialect: "postgres",
-          ssl: true,
-          protocol: "postgres",
-          dialectOptions: {
-            native: true,
-            ssl: { require: true, rejectUnauthorized: false },
-          },
-          logging: false,
-        }),
+        dialect: "postgres",
+        ssl: true,
+        protocol: "postgres",
+        dialectOptions: {
+          native: true,
+          ssl: { require: true, rejectUnauthorized: false },
+        },
+        logging: false,
+      }),
 };

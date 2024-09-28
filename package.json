@@ -7,6 +7,12 @@
     "lib": "lib"
   },
   "author": "AstroX10",
+  "scripts": {
+    "start": "pm2 start index.js --name fxop-md",
+    "stop": "pm2 stop fxop-md",
+    "restart": "pm2 restart fxop-md",
+    "delete": "pm2 delete fxop-md"
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "baileys": "github:AstroX10/Baileys",
