@@ -18,8 +18,8 @@ module.exports = {
  AUTO_READ: toBool(process.env.AUTO_READ) || false,
  AUTO_STATUS_READ: toBool(process.env.AUTO_STATUS_READ) || false,
  WORK_TYPE: process.env.WORK_TYPE || 'private',
- DELETED_LOG: toBool(process.env.DELETED_LOG) || true,
- DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || true,
+ DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
+ DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || false,
  TIME_ZONE: process.env.TZ || 'Africa/Lagos',
  DATABASE_URL: DATABASE_URL,
  DATABASE:

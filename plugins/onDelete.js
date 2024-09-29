@@ -13,7 +13,7 @@ bot(
   if (!msg) return;
   msg = await serialize(JSON.parse(JSON.stringify(msg.message)), message.client);
   if (!msg) return await message.reply('No deleted message found');
-  let deleted = await message.forward(DELETED_LOG_CHAT, msg.message);
+  let deleted = await message.forward(message.user, DELETED_LOG_CHAT, msg.message);
   var name;
   if (!msg.from.endsWith('@g.us')) {
    let getname = await getName(msg.from);
