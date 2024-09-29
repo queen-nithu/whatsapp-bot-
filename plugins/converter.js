@@ -1,5 +1,5 @@
 const config = require('../config');
-const { bot, Mode, toAudio, webp2mp4, textToImg } = require('../lib');
+const { bot, Mode, toAudio, webp2mp4, convertToWebP } = require('../lib');
 bot(
  {
   pattern: 'sticker',
@@ -8,15 +8,11 @@ bot(
   type: 'converter',
  },
  async (message, match, m) => {
-  if (!message.reply_message && (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.text)) return await message.reply('_Reply to photo/video/text_');
+  if (!message.reply_message && (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.text)) return await message.reply('_Reply to photo/video_');
   var buff;
-  if (message.reply_message.text) {
-   buff = await textToImg(message.reply_message.text);
-  } else {
-   buff = await m.quoted.download();
-  }
-
-  message.sendMessage(message.jid, buff, { packname: config.PACKNAME, author: config.AUTHOR }, 'sticker');
+  buff = await m.quoted.download();
+  let stickerWebp = await convertToWebP(buff);
+  message.sendMessage(message.jid, stickerWebp, { packname: config.PACKNAME, author: config.AUTHOR }, 'sticker');
  }
 );
 
@@ -29,8 +25,8 @@ bot(
  },
  async (message, match, m) => {
   if (!message.reply_message.sticker) return await message.reply('_Reply to a sticker_');
-  const packname = match.split(';')[0] || config.PACKNAME;
-  const author = match.split(';')[1] || config.AUTHOR;
+  const packname = config.PACKNAME;
+  const author = config.AUTHOR;
   let buff = await m.quoted.download();
   message.sendMessage(message.jid, buff, { packname, author }, 'sticker');
  }
@@ -54,15 +50,13 @@ bot(
  {
   pattern: 'mp3',
   fromMe: Mode,
-  desc: 'converts video/voice to mp3',
+  desc: 'Converts video/voice to mp3',
   type: 'downloader',
  },
  async (message, match, m) => {
   let buff = await m.quoted.download();
-  console.log(typeof buff);
-  buff = await toAudio(buff, 'mp3');
-  console.log(typeof buff);
-  return await message.sendMessage(message.jid, buff, { mimetype: 'audio/mpeg' }, 'audio');
+  const mp3Buffer = await toAudio(buff);
+  await message.sendMessage(message.jid, mp3Buffer, { mimetype: 'audio/mpeg' }, 'audio');
  }
 );
 

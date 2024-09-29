@@ -3,6 +3,20 @@ const { DELETED_LOG_CHAT, DELETED_LOG } = require('../config');
 
 bot(
  {
+  pattern: 'vv',
+  fromMe: Mode,
+  info: 'Downloads ViewOnce Messages',
+  type: 'whatsapp',
+ },
+ async (message, match, m, client) => {
+  if (!m.quoted) return await message.sendReply('_Reply ViewOnce Message_');
+  var buff;
+  buff = await m.quoted.download();
+  return await message.send(buff);
+ }
+);
+bot(
+ {
   pattern: 'setpp',
   fromMe: true,
   desc: 'Set profile picture',
