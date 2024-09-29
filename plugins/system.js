@@ -1,5 +1,6 @@
 const os = require('os');
-const { bot, Mode, runtime, commands } = require('../lib');
+const util = require('util');
+const { bot, Mode, runtime, commands, getJson, getBuffer } = require('../lib');
 const { TIME_ZONE } = require('../config');
 const { exec } = require('child_process');
 
@@ -143,6 +144,18 @@ bot(
 
 bot(
  {
+  pattern: 'runtime',
+  fromMe: Mode,
+  desc: 'Check uptime of bot',
+  type: 'system',
+ },
+ async (message, match) => {
+  message.send(`*Uptime:* ${runtime(process.uptime())}`);
+ }
+);
+
+bot(
+ {
   on: 'text',
   fromMe: true,
   dontAddCommandList: true,
@@ -155,23 +168,33 @@ bot(
   const evalCmd = content.slice(1).trim();
 
   try {
-   let result;
    const scope = {
     message,
     match,
     m,
     client,
+    console,
+    require,
+    process,
+    Buffer,
+    fetch,
+    Promise,
+    getJson,
+    getBuffer,
    };
-   result = await (async function () {
-    const { message, match, m, client } = scope;
-    return eval(evalCmd);
-   })();
-   if (typeof result === 'function') {
-    await message.reply(result.toString());
-   } else if (typeof result !== 'undefined') {
-    await message.reply(require('util').inspect(result, { depth: 2 }) || 'No result');
-   } else {
+
+   const asyncEval = new Function(...Object.keys(scope), `return (async () => { return ${evalCmd}; })();`);
+
+   const result = await asyncEval(...Object.values(scope));
+
+   if (result === undefined) {
     await message.reply('No result');
+   } else if (typeof result === 'function') {
+    await message.reply(result.toString());
+   } else if (typeof result === 'object') {
+    await message.reply(util.inspect(result, { depth: 2, colors: true }) || 'No result');
+   } else {
+    await message.reply(result.toString());
    }
   } catch (error) {
    await message.reply(`Error: ${error.message}`);
