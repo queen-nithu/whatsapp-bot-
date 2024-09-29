@@ -8,14 +8,12 @@
   },
   "author": "AstroX10",
   "scripts": {
-    "start": "pm2 start index.js --name fxop-md",
-    "stop": "pm2 stop fxop-md",
-    "restart": "pm2 restart fxop-md",
-    "delete": "pm2 delete fxop-md"
+    "start": "pm2 start . --attach --name fx-md",
+    "stop": "pm2 stop fx-md"
   },
   "dependencies": {
     "axios": "^1.4.0",
-    "baileys": "github:AstroX10/Baileys",
+    "baileys": "git+https://github.com/AstroX10/Baileys.git",
     "bitly": "^4.1.1",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.4.5",
@@ -28,8 +26,11 @@
     "jsdom": "^22.1.0",
     "jsqr": "^1.4.0",
     "node-webpmux": "^3.1.7",
+    "pastebin-js": "^1.0.6",
+    "pdfkit": "^0.15.0",
     "pg": "^8.11.5",
     "pino": "^8.14.1",
+    "play-dl": "^1.9.7",
     "pm2": "^5.3.0",
     "qrcode": "^1.5.3",
     "qrcode-reader": "^1.0.4",
