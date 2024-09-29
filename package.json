@@ -10,7 +10,8 @@
  "scripts": {
   "start": "pm2 start . --attach --name fx-md",
   "stop": "pm2 stop fx-md",
-  "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+  "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+  "test": "node test.js"
  },
  "dependencies": {
   "@ffmpeg-installer/ffmpeg": "^1.1.0",
