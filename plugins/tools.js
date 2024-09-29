@@ -2,18 +2,16 @@ const {
   command,
   qrcode,
   Bitly,
-  isPrivate,
+  Mode,
   isUrl,
   readQr,
-} = require("../../lib/");
+} = require("../lib/");
 
-const { downloadMediaMessage } = require("baileys");
-const { getLyrics } = require("../../lib/functions");
-const config = require("../../config");
-command(
+const config = require("../config");
+bot(
   {
     pattern: "vv",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Forwards The View once messsage",
     type: "tool",
   },
@@ -24,7 +22,7 @@ command(
 );
 
 // STATUS SAVER ( MAKE fromMe: false TO USE AS PUBLIC )
-command(
+bot(
   {
     on: "text",
     fromMe: !config.STATUS_SAVER,
@@ -51,10 +49,10 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "qr",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Read/Write Qr.",
     type: "Tool",
   },
@@ -83,10 +81,10 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "bitly",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Converts Url to bitly",
     type: "tool",
   },
@@ -99,34 +97,3 @@ command(
   }
 );
 
-command(
-  {
-    pattern: "lyric",
-    fromMe: isPrivate,
-    desc: "Searches for lyrics based on the format: song;artist",
-    type: "tools",
-  },
-  async (message, match) => {
-    const [song, artist] = match.split(";").map((item) => item.trim());
-    if (!song || !artist) {
-      await message.reply("Search with this format: \n\t_lyric song;artist_");
-    } else {
-      try {
-        const data = await getLyrics(song, artist);
-        if (data) {
-          return await message.reply(
-            `*Artist:* ${data.artist_name}\n*Song:* ${
-              data.song
-            }\n*Lyrics:*\n${data.lyrics.trim()}`
-          );
-        } else {
-          return await message.reply(
-            "No lyrics found for this song by this artist."
-          );
-        }
-      } catch (error) {
-        return await message.reply("An error occurred while fetching lyrics.");
-      }
-    }
-  }
-);

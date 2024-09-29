@@ -1,18 +1,18 @@
-const plugins = require("../../lib/plugins");
-const { command, isPrivate, clockString, pm2Uptime } = require("../../lib");
-const { OWNER_NAME, BOT_NAME } = require("../../config");
+const plugins = require("../lib/Utils/plugins");
+const { bot, Mode, clockString, pm2Uptime } = require("../lib/Utils");
+const { OWNER_NAME, BOT_NAME } = require("../config");
 const { hostname } = require("os");
 
-command(
+bot(
   {
     pattern: "menu",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Show All Commands",
     dontAddCommandList: true,
     type: "user",
   },
   async (message, match) => {
-   
+
     if (match) {
       for (let i of plugins.commands) {
         if (
@@ -66,16 +66,16 @@ Description: ${i.desc}\`\`\``);
 
       menu += `\n`;
       menu += `_🔖Send ${prefix}menu <command name> to get detailed information of a specific command._\n*📍Eg:* _${prefix}menu plugin_`;
-      return await message.sendMessage(message.jid,menu);
+      return await message.sendMessage(message.jid, menu);
     }
   }
 );
 
 
-command(
+bot(
   {
     pattern: "list",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Show All Commands",
     type: "user",
     dontAddCommandList: true,

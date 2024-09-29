@@ -1,9 +1,8 @@
-const { fromBuffer, mimeTypes } = require("file-type");
-const { command, isPrivate } = require("../../lib/");
-command(
+const { bot, Mode } = require("../lib");
+bot(
   {
     pattern: "ping",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "To check ping",
     type: "user",
   },

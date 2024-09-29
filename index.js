@@ -8,20 +8,25 @@ global.__basedir = __dirname;
 
 const readAndRequireFiles = async (directory) => {
   const files = await fs.readdir(directory);
-  return Promise.all(
+  return (await Promise.all(
     files
-      .filter((file) => path.extname(file).toLowerCase() === ".js")
-      .map((file) => require(path.join(directory, file)))
-  );
+      .filter(file => path.extname(file).toLowerCase() === '.js')
+      .map(async file => {
+        try {
+          return require(path.join(directory, file));
+        } catch (error) {
+          console.error(`Error in file ${file}:${error.lineNumber || ''} - Skipping`);
+          return null;
+        }
+      })
+  )).filter(Boolean);
 };
 
 async function initialize() {
 
   await readAndRequireFiles(path.join(__dirname, "/lib/Store/"));
   console.log("Syncing Database");
-
   await config.DATABASE.sync();
-
   console.log("⬇  Installing Plugins...");
   await readAndRequireFiles(path.join(__dirname, "/plugins/"));
   await getandRequirePlugins();

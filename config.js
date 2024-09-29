@@ -39,7 +39,7 @@ module.exports = {
   DATABASE_URL: DATABASE_URL,
   STATUS_SAVER: toBool(process.env.STATUS_SAVER) || true,
   DATABASE:
-    DATABASE_URL === "./assets/database.db"
+    DATABASE_URL === "./database.db"
       ? new Sequelize({
         dialect: "sqlite",
         storage: DATABASE_URL,

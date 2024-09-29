@@ -1,10 +1,9 @@
 const { fromBuffer } = require("file-type");
-const { command, isPrivate } = require("../../lib/");
-const { ffmpeg, parseTimeToSeconds } = require("../../lib/functions");
-command(
+const { bot, Mode, ffmpeg, parseTimeToSecond } = require("../lib");
+bot(
   {
     pattern: "trim",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Trim the video or audio",
     type: "user",
   },
@@ -26,8 +25,8 @@ command(
         "Give the start and end time in this format: mm:ss|mm:ss"
       );
     const buffer = await m.quoted.download();
-    const startSeconds = parseTimeToSeconds(start);
-    const endSeconds = parseTimeToSeconds(end);
+    const startSeconds = parseTimeToSecond(start);
+    const endSeconds = parseTimeToSecond(end);
     const duration = endSeconds - startSeconds;
     const ext = (await fromBuffer(buffer)).ext;
     const args = ["-ss", `${startSeconds}`, "-t", `${duration}`, "-c", "copy"];

@@ -1,9 +1,8 @@
-const { command } = require("../../lib");
+const { bot, PluginDB, installPlugin } = require("../lib");
 const axios = require("axios");
 const fs = require("fs");
-const { PluginDB, installPlugin } = require("../database").Plugins;
 
-command(
+bot(
   {
     pattern: "install",
     fromMe: true,
@@ -62,7 +61,7 @@ command(
   }
 );
 
-command(
+bot(
   { pattern: "plugin", fromMe: true, desc: "plugin list", type: "user" },
   async (message, match) => {
     var mesaj = "";
@@ -86,7 +85,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "remove",
     fromMe: true,

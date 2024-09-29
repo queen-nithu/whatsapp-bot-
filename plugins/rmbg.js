@@ -1,10 +1,9 @@
-const { command, isPrivate } = require("../../lib/");
-const { removeBg } = require("../../lib/functions");
-const config = require("../../config");
-command(
+const { bot, Mode,removeBg } = require("../lib");
+const config = require("../config");
+bot(
   {
     pattern: "rmbg",
-    fromMe: isPrivate,
+    fromMe: Mode,
     desc: "Remove background of an image",
     type: "image",
   },

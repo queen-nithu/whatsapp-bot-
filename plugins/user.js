@@ -1,11 +1,9 @@
-const { command, isAdmin, parsedJid } = require("../../lib");
+const { bot, isAdmin, parsedJid, saveWarn, resetWarn, secondsToDHMS } = require("../lib");
 const { exec } = require("child_process");
-const { PausedChats, WarnDB } = require("../database");
-const { WARN_COUNT } = require("../../config");
-const { secondsToDHMS } = require("../../lib/functions");
-const { saveWarn, resetWarn } = WarnDB;
+const { PausedChats } = require("../lib/Store");
+const { WARN_COUNT } = require("../config");
 
-command(
+bot(
   {
     pattern: "pause",
     fromMe: true,
@@ -24,7 +22,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "shutdown",
     fromMe: true,
@@ -42,7 +40,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "resume",
     fromMe: true,
@@ -70,7 +68,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "setpp",
     fromMe: true,
@@ -86,7 +84,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "setname",
     fromMe: true,
@@ -100,7 +98,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "block",
     fromMe: true,
@@ -122,7 +120,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "unblock",
     fromMe: true,
@@ -148,7 +146,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "jid",
     fromMe: true,
@@ -163,7 +161,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "dlt",
     fromMe: true,
@@ -177,7 +175,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "warn",
     fromMe: true,
@@ -194,8 +192,7 @@ command(
     let userWarnCount = warnInfo ? warnInfo.warnCount : 0;
     userWarnCount++;
     await message.reply(
-      `_User @${
-        userId.split("@")[0]
+      `_User @${userId.split("@")[0]
       } warned._ \n_Warn Count: ${userWarnCount}._ \n_Reason: ${reason}_`,
       { mentions: [userId] }
     );
@@ -215,7 +212,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "resetwarn",
     fromMe: true,
@@ -234,7 +231,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "uptime",
     fromMe: true,
