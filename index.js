@@ -1,9 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const config = require("./config");
-const connect = require("./lib/connect");
-const { getandRequirePlugins } = require("./lib/Store/plugins");
-
+const { connect, getandRequirePlugins } = require("./lib");
 global.__basedir = __dirname;
 
 const readAndRequireFiles = async (directory) => {
