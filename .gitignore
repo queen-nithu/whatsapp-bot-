@@ -132,3 +132,5 @@ database.db
 
 .gitignore
 session
+/auth
+bot.db

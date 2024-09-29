@@ -788,7 +788,7 @@ audio-buffer@^5.0.0:
 
 audio-decode@^2.2.2:
   version "2.2.2"
-  resolved "https://registry.npmjs.org/audio-decode/-/audio-decode-2.2.2.tgz"
+  resolved "https://registry.yarnpkg.com/audio-decode/-/audio-decode-2.2.2.tgz#5ea56c93ac87a0481c315d67a4afe0b6a578378a"
   integrity sha512-xyh7z6dpRT+5Ez4ggV2cEkSShkDvvIBBmVPR3kYY7uIBqRO1BGNjofip6JnjBnvezhrU3ypBGZjepyKFDZWnDw==
   dependencies:
     "@wasm-audio-decoders/flac" "^0.2.4"
@@ -833,7 +833,7 @@ axios@^1.4.0, axios@^1.7.7:
 
 "baileys@git+https://github.com/AstroX10/Baileys.git":
   version "6.7.8"
-  resolved "git+https://github.com/AstroX10/Baileys.git#4fbbf83cd27cb3ac891264999acd198b07859b6e"
+  resolved "git+https://github.com/AstroX10/Baileys.git#a2301deef046d29bf2b66c9ae21011b86e235c9a"
   dependencies:
     "@adiwajshing/keyed-db" "^0.2.4"
     "@hapi/boom" "^9.1.3"
@@ -2529,7 +2529,7 @@ libphonenumber-js@^1.10.20:
 
 "libsignal@git+https://github.com/AstroX10/libsignal.git":
   version "2.0.1"
-  resolved "git+https://github.com/AstroX10/libsignal.git#25db0a48575cb9ee55e66c771daf62b0c7b4f9ab"
+  resolved "git+https://github.com/AstroX10/libsignal.git#3214e5b7738bd29452b63fa63b42f5c8bace3771"
   dependencies:
     curve25519-js "^0.0.4"
     protobufjs "6.8.8"

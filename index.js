@@ -1,8 +1,6 @@
 const path = require('path');
 const config = require('./config');
 const { connect, getandRequirePlugins, requireJS } = require('./lib');
-global.__basedir = __dirname;
-
 async function initialize() {
  await requireJS(path.join(__dirname, '/lib/Store/'));
  console.log('Syncing Database');

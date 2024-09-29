@@ -1,67 +1,72 @@
+const os = require('os');
 const plugins = require('../lib/Utils');
-const { bot, Mode, clockString, pm2Uptime } = require('../lib');
-const { OWNER_NAME, BOT_NAME } = require('../config');
-const { hostname } = require('os');
+const { bot, Mode, runtime, commands } = require('../lib');
+const { TIME_ZONE } = require('../config');
+
+function getRAMUsage() {
+ const totalMemory = os.totalmem();
+ const freeMemory = os.freemem();
+ const usedMemory = totalMemory - freeMemory;
+ return `${(usedMemory / 1024 / 1024 / 1024).toFixed(2)} GB / ${(totalMemory / 1024 / 1024 / 1024).toFixed(2)} GB`;
+}
+
+function getOS() {
+ const osType = os.type();
+ switch (osType) {
+  case 'Linux':
+   return 'Linux';
+  case 'Darwin':
+   return 'MacOS';
+  case 'Windows_NT':
+   return 'Windows';
+  default:
+   return 'VPS';
+ }
+}
 
 bot(
  {
   pattern: 'menu',
   fromMe: Mode,
-  desc: 'Show All Commands',
+  description: 'Show All Commands',
   dontAddCommandList: true,
-  type: 'user',
  },
- async (message, match) => {
-  if (match) {
-   for (let i of plugins.commands) {
-    if (i.pattern instanceof RegExp && i.pattern.test(message.prefix + match)) {
-     const cmdName = i.pattern.toString().split(/\W+/)[1];
-     message.reply(`\`\`\`Command: ${message.prefix}${cmdName.trim()}
-Description: ${i.desc}\`\`\``);
-    }
-   }
-  } else {
-   let { prefix } = message;
-   let [date, time] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).split(',');
-   let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
-┃ ⎆  *OWNER*:  ${OWNER_NAME}
-┃ ⎆  *PREFIX*: ${prefix}
-┃ ⎆  *HOST NAME*: ${hostname().split('-')[0]}
-┃ ⎆  *DATE*: ${date}
-┃ ⎆  *TIME*: ${time}
-┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-┃ ⎆  *UPTIME*: ${clockString(process.uptime())} 
-╰━━━━━━━━━━━━━━━\n`;
-   let cmnd = [];
-   let cmd;
-   let category = [];
-   plugins.commands.map((command, num) => {
-    if (command.pattern instanceof RegExp) {
-     cmd = command.pattern.toString().split(/\W+/)[1];
-    }
+ async (message) => {
+  const { prefix, pushName, jid } = message;
+  const currentTime = new Date().toLocaleTimeString('en-IN', { timeZone: TIME_ZONE });
+  const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+  const currentDate = new Date().toLocaleDateString('en-IN', { timeZone: TIME_ZONE });
+  let menuText = `╭─ ғxᴏᴘʀɪsᴀ ᴍᴅ ───
+│ Prefix: ${prefix}
+│ User: ${pushName}
+│ Os: ${getOS()}
+│ Plugins: ${commands.length}
+│ Runtime: ${runtime(process.uptime())}
+│ Ram: ${getRAMUsage()}
+│ Time: ${currentTime}
+│ Day: ${currentDay}
+│ Date: ${currentDate}
+│ Version: ${require('../package.json').version}
+╰────────────────\n`;
 
-    if (!command.dontAddCommandList && cmd !== undefined) {
-     let type = command.type ? command.type.toLowerCase() : 'misc';
+  const categorized = commands
+   .filter((cmd) => cmd.pattern && !cmd.dontAddCommandList)
+   .map((cmd) => ({
+    name: cmd.pattern.toString().split(/\W+/)[2],
+    category: cmd.type?.toLowerCase() || 'misc',
+   }))
+   .reduce((acc, { name, category }) => {
+    acc[category] = (acc[category] || []).concat(name);
+    return acc;
+   }, {});
 
-     cmnd.push({ cmd, type });
-
-     if (!category.includes(type)) category.push(type);
-    }
-   });
-   cmnd.sort();
-   category.sort().forEach((cmmd) => {
-    menu += `\n\t⦿---- *${cmmd.toUpperCase()}* ----⦿\n`;
-    let comad = cmnd.filter(({ type }) => type == cmmd);
-    comad.forEach(({ cmd }) => {
-     menu += `\n⛥  _${cmd.trim()}_ `;
-    });
-    menu += `\n`;
+  Object.keys(categorized)
+   .sort()
+   .forEach((category) => {
+    menuText += `\n╭── ${category} ────\n│ ${categorized[category].sort().join('\n│ ')}\n╰──────────────\n`;
    });
 
-   menu += `\n`;
-   menu += `_🔖Send ${prefix}menu <command name> to get detailed information of a specific command._\n*📍Eg:* _${prefix}menu plugin_`;
-   return await message.sendMessage(message.jid, menu);
-  }
+  return await message.sendMessage(jid, '```' + menuText.trim() + '```');
  }
 );
 
@@ -70,7 +75,6 @@ bot(
   pattern: 'list',
   fromMe: Mode,
   desc: 'Show All Commands',
-  type: 'user',
   dontAddCommandList: true,
  },
  async (message, match, { prefix }) => {
