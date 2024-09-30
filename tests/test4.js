@@ -8,7 +8,7 @@ const cookieJar = new tough.CookieJar();
 const client = wrapper(
  axios.create({
   jar: cookieJar,
-  httpsAgent: new https.Agent({ keepAlive: true }),
+  // httpsAgent: new https.Agent({ keepAlive: true }),
  })
 );
 
@@ -71,6 +71,6 @@ async function bypassCloudflare(url, config) {
  }
 }
 
-getJson('https://giftedapis.us.kg/api/download/spotifydl?url=https://open.spotify.com/track/2DGa7iaidT5s0qnINlwMjJ&apikey=gifted')
+getJson('https://api.guruapi.tech/insta/v1/igdl?url=https://www.instagram.com/reel/DAYPY6GMst4/?utm_source=ig_web_copy_link')
  .then((result) => console.log(result))
  .catch((error) => console.error('Error:', error));

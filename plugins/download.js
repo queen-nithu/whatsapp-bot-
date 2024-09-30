@@ -1,4 +1,4 @@
-const { bot, Mode, getJson, postJson, toAudio, toPTT } = require('../lib');
+const { bot, Mode, getJson, postJson, toAudio, toPTT, getBuffer } = require('../lib');
 bot(
  {
   pattern: 'spotify ?(.*)',
@@ -42,12 +42,16 @@ bot(
   type: 'download',
  },
  async (message, match, m, client) => {
-  if (!match || !match.includes('instagram.com')) return await message.sendReply('*_Provide Vaild Instagram Url_*');
-  const msg = (await message.reply('_Downloading_')) && message.react('⬇️');
+  if (!match || !match.includes('instagram.com')) return await message.sendReply('*_Provide a Valid Instagram URL_*');
+  const msg = await message.reply('_Downloading_');
+  await msg.react('⬇️');
   const res = await getJson(`https://api.guruapi.tech/insta/v1/igdl?url=${encodeURIComponent(match.trim())}`);
+
   if (res) {
-   (await msg.edit('_Download Success_')) && msg.react('✅');
-   return await message.send(res.media[0].url);
+   await msg.edit('_Download Success_');
+   await msg.react('✅');
+   const extarctedUrl = res.media[0].url.replace(/'/g, '');
+   return await message.send(extarctedUrl, {quoted: msg});
   } else {
    return await message.sendMessage(message.chat, '```Error From API```');
   }
