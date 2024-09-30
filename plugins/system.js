@@ -181,7 +181,8 @@ bot(
     Promise,
     getJson,
     getBuffer,
-    exec
+    exec,
+    bot,
    };
 
    const asyncEval = new Function(...Object.keys(scope), `return (async () => { return ${evalCmd}; })();`);

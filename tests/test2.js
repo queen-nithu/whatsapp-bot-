@@ -1,6 +1,6 @@
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
-const path = require('path')
+const path = require('path');
 // Set the ffmpeg binary path
 ffmpeg.setFfmpegPath(ffmpegPath);
 
@@ -15,7 +15,7 @@ const convertToMp3 = (inputPath, outputPath) => {
    .run();
  });
 };
-const viddir = path.join(__dirname, 'video.mp4')
+const viddir = path.join(__dirname, 'video.mp4');
 convertToMp3(viddir, 'output.mp3')
  .then((msg) => console.log(msg))
  .catch((err) => console.error(err));

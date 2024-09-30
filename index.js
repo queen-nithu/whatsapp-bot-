@@ -7,13 +7,13 @@ const app = express();
 const PORT = process.env.PORT || '8000';
 
 async function initialize() {
-  await requireJS(path.join(__dirname, '/lib/Store/'));
-  await config.DATABASE.sync();
-  await requireJS(path.join(__dirname, '/plugins/'));
-  await getandRequirePlugins();
-  return connect();
+ await requireJS(path.join(__dirname, '/lib/Store/'));
+ await config.DATABASE.sync();
+ await requireJS(path.join(__dirname, '/plugins/'));
+ await getandRequirePlugins();
+ return connect();
 }
 
 app.listen(PORT, async () => {
-  return await initialize();
+ return await initialize();
 });

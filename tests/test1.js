@@ -1,6 +1,6 @@
 const sharp = require('sharp');
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
 /**
  * Converts an image (path or buffer) to WebP format.
  * @param {string|Buffer} input - Path to the image or image buffer.
@@ -16,7 +16,7 @@ async function convertToWebP(input, outputPath = null) {
 
 // Usage Example:
 
-const imginput = path.join(__dirname, 'image.png')
+const imginput = path.join(__dirname, 'image.png');
 convertToWebP(imginput, 'output_image.webp').then(() => {
  console.log('Conversion from file path successful!');
 });
