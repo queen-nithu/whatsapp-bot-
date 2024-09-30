@@ -34,3 +34,22 @@ bot(
  }
 );
 
+bot(
+ {
+  pattern: 'insta',
+  fromMe: Mode,
+  desc: 'Downloads Instagram Videos Only!',
+  type: 'download',
+ },
+ async (message, match, m, client) => {
+  if (!match || !match.includes('instagram.com')) return await message.sendReply('*_Provide Vaild Instagram Url_*');
+  const msg = (await message.reply('_Downloading_')) && message.react('⬇️');
+  const res = await getJson(`https://api.guruapi.tech/insta/v1/igdl?url=${encodeURIComponent(match.trim())}`);
+  if (res) {
+   (await msg.edit('_Download Success_')) && msg.react('✅');
+   return await message.send(res.media[0].url);
+  } else {
+   return await message.sendMessage(message.chat, '```Error From API```');
+  }
+ }
+);
