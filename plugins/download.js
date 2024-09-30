@@ -30,7 +30,7 @@ bot(
   await msg.react('⬇️');
   await msg.edit('*_Download Success_*');
   await message.send(res.result.hd, { caption: res.result.title, quoted: msg });
-  return await message.react('✅');
+  return await msg.react('✅');
  }
 );
 
