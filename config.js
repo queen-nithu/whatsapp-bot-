@@ -20,7 +20,7 @@ module.exports = {
  DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
  DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || false,
  TIME_ZONE: process.env.TZ || 'Africa/Lagos',
- WORK_TYPE: process.env.WORK_TYPE || 'public',
+ WORK_TYPE: process.env.WORK_TYPE || 'private',
  DATABASE_URL: DATABASE_URL,
  DATABASE:
   DATABASE_URL === './bot.db'

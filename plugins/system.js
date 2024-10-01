@@ -139,7 +139,7 @@ bot(
   const msg = await message.reply('');
   const end = new Date().getTime();
   const responseTime = (end - start) / 1000;
-  await msg.edit(`ʟᴀᴛᴇɴᴄʏ: ${responseTime} sᴇᴄs`);
+  await msg.sendMessage(message.jid, `ʟᴀᴛᴇɴᴄʏ: ${responseTime} sᴇᴄs`, 'edit');
  }
 );
 
