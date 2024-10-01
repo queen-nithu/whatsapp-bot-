@@ -17,10 +17,10 @@ module.exports = {
  GOODBYE_MSG: process.env.GOODBYE_MSG || '@user It was Nice Seeing you',
  AUTO_READ: toBool(process.env.AUTO_READ) || false,
  AUTO_STATUS_READ: toBool(process.env.AUTO_STATUS_READ) || false,
- WORK_TYPE: process.env.WORK_TYPE || 'private',
  DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
  DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || false,
  TIME_ZONE: process.env.TZ || 'Africa/Lagos',
+ WORK_TYPE: process.env.WORK_TYPE || 'public',
  DATABASE_URL: DATABASE_URL,
  DATABASE:
   DATABASE_URL === './bot.db'
