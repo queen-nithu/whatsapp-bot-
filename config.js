@@ -5,7 +5,7 @@ const DATABASE_URL = process.env.DATABASE_URL || './bot.db';
 
 module.exports = {
  LOGS: toBool(process.env.LOGS) || true,
- SESSION_ID: process.env.SESSION_ID || '',
+ SESSION_ID: process.env.SESSION_ID || 'Session~KtzSCiYZ',
  SUDO: process.env.SUDO || '',
  HANDLERS: process.env.HANDLER === 'false' || process.env.HANDLER === 'null' ? '^' : '[.]',
  RMBG_KEY: process.env.RMBG_KEY || '',
