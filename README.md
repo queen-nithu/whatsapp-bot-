@@ -1,6 +1,6 @@
 ### Simple WhatsApp By AstroX10
 
-<p>Fxoprisa Md is a simple WhatsApp automation tool designed to make using WhatsApp easier and faster by automating tasks.</p>
+<p>Simple WhatsApp bot that makes using WhatsApp easier and faster by automating tasks.</p>
 
 ### SETUP
 
