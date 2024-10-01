@@ -6,7 +6,7 @@ const { MessageType } = require('baileys');
 bot(
  {
   pattern: 'qr ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Read/Write Qr.',
   type: 'tools',
  },
@@ -28,7 +28,7 @@ bot(
 bot(
  {
   pattern: 'bitly ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Converts Url to bitly',
   type: 'tools',
  },
@@ -44,7 +44,7 @@ bot(
 bot(
  {
   pattern: 'rmbg ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Remove background of an image',
   type: 'tools',
  },
@@ -62,7 +62,7 @@ bot(
 bot(
  {
   pattern: 'tiny ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Shortens Link with TinyURL',
   type: 'tools',
  },
@@ -80,7 +80,7 @@ bot(
 bot(
  {
   pattern: 'ssweb ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Screenshot Websites',
   type: 'tools',
  },
@@ -97,7 +97,7 @@ bot(
 bot(
  {
   pattern: 'url ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Shortens link URL',
   type: 'tools',
  },
@@ -114,7 +114,7 @@ bot(
 bot(
  {
   pattern: 'upload ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Uploads Image',
   type: 'tools',
  },
@@ -130,7 +130,7 @@ bot(
 bot(
  {
   pattern: 'time ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Find Time',
   type: 'tools',
  },
@@ -171,7 +171,7 @@ bot(
 bot(
  {
   pattern: 'wame ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'wame generator',
   type: 'tools',
  },
@@ -185,7 +185,7 @@ bot(
 bot(
  {
   pattern: 'topdf',
-  fromMe: Mode,
+  fromMe: false,
   info: 'Converts Text/Image to PDF',
   type: 'tools',
  },

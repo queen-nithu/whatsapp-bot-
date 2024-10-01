@@ -2,7 +2,7 @@ const { bot, Mode, getJson, postJson, toAudio, toPTT, getBuffer } = require('../
 bot(
  {
   pattern: 'spotify ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Downloads Spotify Music',
   type: 'download',
  },
@@ -19,7 +19,7 @@ bot(
 bot(
  {
   pattern: 'fb ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Downloads Facebook Videos | Reels',
   type: 'download',
  },
@@ -37,7 +37,7 @@ bot(
 bot(
  {
   pattern: 'insta',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Downloads Instagram Videos Only!',
   type: 'download',
  },

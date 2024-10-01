@@ -6,7 +6,7 @@ let triviaGames = {};
 bot(
  {
   pattern: 'trivia',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Start a trivia game.',
   type: 'game',
  },
@@ -33,7 +33,7 @@ bot(
 bot(
  {
   on: 'text',
-  fromMe: Mode,
+  fromMe: false,
   pattern: false,
   dontAddCommandList: true,
  },
@@ -115,7 +115,7 @@ async function endTriviaGame(message, userId) {
 bot(
  {
   pattern: 'xkcd',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Send a random XKCD comic.',
   type: 'misc',
  },
@@ -138,7 +138,7 @@ bot(
 bot(
  {
   pattern: 'joke',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Fetch a random joke',
   dontAddCommandList: false,
  },

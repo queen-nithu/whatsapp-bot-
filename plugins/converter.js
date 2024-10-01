@@ -3,7 +3,7 @@ const { bot, Mode, toAudio, webp2mp4, convertToWebP } = require('../lib');
 bot(
  {
   pattern: 'sticker',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Converts Photo/video/text to sticker',
   type: 'converter',
  },
@@ -19,7 +19,7 @@ bot(
 bot(
  {
   pattern: 'take',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Converts Photo or video to sticker',
   type: 'converter',
  },
@@ -35,7 +35,7 @@ bot(
 bot(
  {
   pattern: 'photo',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Changes sticker to Photo',
   type: 'converter',
  },
@@ -49,7 +49,7 @@ bot(
 bot(
  {
   pattern: 'mp3',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Converts video/voice to mp3',
   type: 'downloader',
  },
@@ -63,7 +63,7 @@ bot(
 bot(
  {
   pattern: 'mp4',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'converts video/voice to mp4',
   type: 'downloader',
  },
@@ -82,7 +82,7 @@ bot(
 bot(
  {
   pattern: 'img',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Converts Sticker to image',
   type: 'converter',
  },

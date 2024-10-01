@@ -4,7 +4,7 @@ const { DELETED_LOG_CHAT, DELETED_LOG } = require('../config');
 bot(
  {
   pattern: 'vv',
-  fromMe: Mode,
+  fromMe: false,
   info: 'Downloads ViewOnce Messages',
   type: 'whatsapp',
  },
@@ -116,7 +116,7 @@ bot(
 bot(
  {
   pattern: 'quoted',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'quoted message',
  },
  async (message, match) => {
@@ -147,7 +147,7 @@ bot(
 bot(
  {
   pattern: 'forward ?(.*)',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Forwards the replied message (any type)',
   type: 'whatsapp',
  },

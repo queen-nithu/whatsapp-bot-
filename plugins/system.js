@@ -29,7 +29,7 @@ function getOS() {
 bot(
  {
   pattern: 'menu',
-  fromMe: Mode,
+  fromMe: false,
   description: 'Show All Commands',
   dontAddCommandList: true,
  },
@@ -75,7 +75,7 @@ bot(
 bot(
  {
   pattern: 'list',
-  fromMe: Mode,
+  fromMe: false,
   description: 'Show All Commands',
   dontAddCommandList: true,
  },
@@ -130,7 +130,7 @@ bot(
 bot(
  {
   pattern: 'ping',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Bot response in milliseconds.',
   type: 'system',
  },
@@ -146,7 +146,7 @@ bot(
 bot(
  {
   pattern: 'runtime',
-  fromMe: Mode,
+  fromMe: false,
   desc: 'Check uptime of bot',
   type: 'system',
  },
