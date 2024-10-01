@@ -3,7 +3,7 @@ const util = require('util');
 const { bot, Mode, runtime, commands, getJson, getBuffer } = require('../lib');
 const { TIME_ZONE } = require('../config');
 const { exec } = require('child_process');
-const fetchJson = getJson
+const fetchJson = getJson;
 
 function getRAMUsage() {
  const totalMemory = os.totalmem();
@@ -184,7 +184,7 @@ bot(
     getBuffer,
     exec,
     bot,
-    fetchJson
+    fetchJson,
    };
 
    const asyncEval = new Function(...Object.keys(scope), `return (async () => { return ${evalCmd}; })();`);

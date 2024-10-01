@@ -51,7 +51,7 @@ bot(
    await msg.edit('_Download Success_');
    await msg.react('✅');
    const extarctedUrl = res.media[0].url.replace(/'/g, '');
-   return await message.send(extarctedUrl, {quoted: msg});
+   return await message.send(extarctedUrl, { quoted: msg });
   } else {
    return await message.sendMessage(message.chat, '```Error From API```');
   }
